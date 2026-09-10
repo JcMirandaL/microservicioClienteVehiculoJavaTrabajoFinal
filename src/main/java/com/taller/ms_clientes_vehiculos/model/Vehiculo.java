@@ -22,7 +22,7 @@ public class Vehiculo {
     private Long id;
 
     @NotBlank(message = "El campo 'PLACA' no puede quedar vacío.")
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     @Size(min = 4, max = 15, message = "La placa debe estar entre 4 y 15 caracteres.")
     private String placa;
 
