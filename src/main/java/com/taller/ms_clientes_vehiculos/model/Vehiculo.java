@@ -7,7 +7,7 @@ import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 
 @Data
@@ -47,7 +47,7 @@ public class Vehiculo {
     private Integer year;
 
     @NotNull(message = "La fecha de creación no puede ser nula")
-    private LocalDate fechaCreacion;
+    private LocalDateTime fechaCreacion =  LocalDateTime.now();
 
 
     //relación
