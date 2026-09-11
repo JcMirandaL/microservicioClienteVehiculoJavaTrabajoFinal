@@ -50,7 +50,29 @@ public class GlobalExceptionHandler {
     }
 
 
+    @ExceptionHandler(VehiculoNotFoundException.class)
+    public ResponseEntity<ApiError> handleVehiculoNotFoundException(VehiculoNotFoundException ex) {
+        ApiError apiError = new ApiError(
+                HttpStatus.NOT_FOUND.value(),
+                "Not Found",
+                ex.getMessage(),
+                null
+        );
 
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+
+    @ExceptionHandler(DuplicatePlacaException.class)
+    public ResponseEntity<ApiError> handleDuplicatePlacaException(DuplicatePlacaException ex) {
+        ApiError apiError = new ApiError(
+                HttpStatus.CONFLICT.value(),
+                "Conflict",
+                ex.getMessage(),
+                null
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiError);
+    }
 
 
 }

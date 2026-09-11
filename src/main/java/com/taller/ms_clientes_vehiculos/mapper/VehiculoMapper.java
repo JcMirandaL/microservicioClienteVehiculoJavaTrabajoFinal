@@ -12,9 +12,10 @@ import java.util.List;
 public interface VehiculoMapper {
 
     @Mapping(target = "id", ignore = true)
+    //@Mapping(target = "cliente", source = "clienteId")
     Vehiculo toEntity(VehiculoRequestDTO dto);
 
-    VehiculoResponseDTO toResponse(Vehiculo vehiculo);
+    VehiculoResponseDTO toResponseDTO(Vehiculo vehiculo);
 
 
     //le digo que si el DTO tiene un valor nulo, no se debe actualizar el valor correspondiente en la entidad
