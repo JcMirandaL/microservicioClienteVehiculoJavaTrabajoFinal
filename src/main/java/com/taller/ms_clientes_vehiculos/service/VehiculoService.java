@@ -1,10 +1,13 @@
 package com.taller.ms_clientes_vehiculos.service;
 
+import com.taller.ms_clientes_vehiculos.common.exception.ClienteNotFoundException;
 import com.taller.ms_clientes_vehiculos.common.exception.VehiculoNotFoundException;
 import com.taller.ms_clientes_vehiculos.dto.VehiculoRequestDTO;
 import com.taller.ms_clientes_vehiculos.dto.VehiculoResponseDTO;
 import com.taller.ms_clientes_vehiculos.mapper.VehiculoMapper;
+import com.taller.ms_clientes_vehiculos.model.Cliente;
 import com.taller.ms_clientes_vehiculos.model.Vehiculo;
+import com.taller.ms_clientes_vehiculos.repository.ClienteRepository;
 import com.taller.ms_clientes_vehiculos.repository.VehiculoRepository;
 import com.taller.ms_clientes_vehiculos.validator.VehiculoValidator;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +20,7 @@ import java.util.List;
 public class VehiculoService {
 
     private final VehiculoRepository vehiculoRepository;
-//    private final UsuarioRepository usuarioRepository; PENDIENTE PARA VALIDAR QUE EL USUARIO EXISTA
+    private final ClienteRepository clienteRepository;
     private final VehiculoMapper vehiculoMapper;
     private final VehiculoValidator vehiculoValidator;
 
@@ -39,8 +42,9 @@ public class VehiculoService {
 
     public VehiculoResponseDTO createVehiculo(VehiculoRequestDTO vehiculoDTO){
 
-        // TODO validar que el usuario exista PENDIENTE PARA CUANDO YA EXISTA EL REPO DE USUARIOS
-
+        // TODO validar que el usuario exista PENDIENTE PARA CUANDO YA EXISTA EL REPO DE clientes
+        Cliente cliente = clienteRepository.findById(vehiculoDTO.getClienteId())
+                .orElseThrow(() -> new ClienteNotFoundException(vehiculoDTO.getClienteId()));
 
         //validar que la placa mo exista en DB
         vehiculoValidator.checkPlacaExists(vehiculoDTO.getPlaca());

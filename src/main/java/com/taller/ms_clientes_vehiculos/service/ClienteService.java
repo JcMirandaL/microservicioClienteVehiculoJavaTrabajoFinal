@@ -25,7 +25,7 @@ public class ClienteService {
         return lista.stream().map(clienteMapper::toResponseDTO).toList();
     }
 
-    public ClienteResponseDTO obtenerPorId(Integer id) {
+    public ClienteResponseDTO obtenerPorId(Long id) {
         Cliente cliente = clienteRepository.findById(id)
                 .orElseThrow(() -> new ClienteNotFoundException(id));
 
@@ -59,7 +59,7 @@ public class ClienteService {
         return clienteMapper.toResponseDTO(cliente);
     }
 
-    public ClienteResponseDTO actualizar(Integer id, ClienteRequestDTO dto) {
+    public ClienteResponseDTO actualizar(Long id, ClienteRequestDTO dto) {
         //validar que exista
         var clienteActualBD = clienteRepository.findById(id)
                 .orElseThrow(() -> new ClienteNotFoundException(id));
@@ -77,7 +77,7 @@ public class ClienteService {
         return clienteMapper.toResponseDTO(clienteActualBD);
     }
 
-    public ClienteResponseDTO eliminar(Integer id) {
+    public ClienteResponseDTO eliminar(Long id) {
         //validar que exista
         var clienteActualBD = clienteRepository.findById(id)
                 .orElseThrow(() -> new ClienteNotFoundException(id));
