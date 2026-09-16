@@ -14,9 +14,14 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/clientes")
 @RequiredArgsConstructor
-public class ClientesController {
+public class ClienteController {
 
     private final ClienteService clienteService;
+
+    @PostMapping
+    public ResponseEntity<ClienteResponseDTO> crear(@Valid @RequestBody ClienteRequestDTO dto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.crear(dto));
+    }
 
     @GetMapping
     public ResponseEntity<List<ClienteResponseDTO>> listarTodos() {
@@ -38,16 +43,10 @@ public class ClientesController {
         return ResponseEntity.ok(clienteService.buscarPorNombre(nombre));
     }
 
-    @PostMapping
-    public ResponseEntity<ClienteResponseDTO> crear(@Valid @RequestBody ClienteRequestDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(clienteService.crear(dto));
-    }
-
     @PutMapping("/{id}")
     public ResponseEntity<ClienteResponseDTO> actualizar(@PathVariable Integer id, @Valid @RequestBody ClienteRequestDTO dto) {
         return ResponseEntity.ok(clienteService.actualizar(id, dto));
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<ClienteResponseDTO> eliminar(@PathVariable Integer id) {
         return ResponseEntity.ok(clienteService.eliminar(id));

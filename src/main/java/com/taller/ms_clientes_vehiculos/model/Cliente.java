@@ -6,16 +6,18 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "tbCliente" )
+@Getter
+@Setter
+@Table(name = "tbCliente")
 public class Cliente {
 
     @Id
@@ -44,9 +46,12 @@ public class Cliente {
     @NotNull(message = "La fecha de creación no puede ser nula")
     private LocalDate fechaCreacion;
 
-
     //relación, mappedBy referencia al atributo de relación de vehículo
     @OneToMany(mappedBy = "cliente")
     private List<Vehiculo> vehiculos;
 
+    @PrePersist
+    public void prePersist() {
+        this.fechaCreacion = LocalDate.now();
+    }
 }
