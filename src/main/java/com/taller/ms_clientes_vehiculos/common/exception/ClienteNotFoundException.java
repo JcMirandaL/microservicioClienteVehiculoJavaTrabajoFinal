@@ -2,7 +2,7 @@ package com.taller.ms_clientes_vehiculos.common.exception;
 
 public class ClienteNotFoundException extends RuntimeException {
 
-    public ClienteNotFoundException(Integer id) {
+    public ClienteNotFoundException(Long id) {
         super("Cliente no encontrado con id: " + id);
     }
 

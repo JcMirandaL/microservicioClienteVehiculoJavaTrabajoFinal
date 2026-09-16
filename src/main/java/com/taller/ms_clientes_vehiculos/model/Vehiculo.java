@@ -41,8 +41,8 @@ public class Vehiculo {
 
     @NotNull(message = "El campo 'Año' no puede quedar vacío.")
     @Column(nullable = false)
-    @Max(value = 4, message = "El año debe tener máximo 4 caracteres.")
-    @Min(value = 4, message = "El año debe tener mínimo 4 caracteres.")
+    @Max(value = 9999, message = "El año debe tener máximo 4 caracteres.")
+    @Min(value = 1000, message = "El año debe tener mínimo 4 caracteres.")
     @Positive(message = "El año debe ser un numero positivo.")
     private Integer year;
 

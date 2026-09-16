@@ -22,7 +22,7 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "El campo 'NOMBRE' no puede quedar vacío")
     @Size(min = 3, max = 100, message = "El nombre debe de estar entre los 3 y 100 caracteres.")
