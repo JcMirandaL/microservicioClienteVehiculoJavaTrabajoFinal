@@ -48,6 +48,33 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiError);
     }
+    //para manejar cédula duplicada al crear o actualizar un cliente
+    @ExceptionHandler(CedulaDuplicada.class)
+    public ResponseEntity<ApiError> handleCedulaDuplicada(CedulaDuplicada ex) {
+
+        ApiError apiError = new ApiError(
+                HttpStatus.CONFLICT.value(),
+                "Conflict",
+                ex.getMessage(),
+                null
+        );
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiError);
+    }
+
+    //para manejar cuando no se encuentra un cliente por id o cédula
+    @ExceptionHandler(jakarta.persistence.EntityNotFoundException.class)
+    public ResponseEntity<ApiError> handleEntityNotFound(jakarta.persistence.EntityNotFoundException ex) {
+
+        ApiError apiError = new ApiError(
+                HttpStatus.NOT_FOUND.value(),
+                "Not Found",
+                ex.getMessage(),
+                null
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
 
 
 
